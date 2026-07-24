@@ -1,0 +1,617 @@
+/* ================= GLOBAL STYLES & VARIABLES ================= */
+:root {
+    --gold: #d4af37;
+    --gold-light: #f3e5ab;
+    --dark-red: #800020;
+    --bg-dark: #0f0a0a;
+    --bg-card: #181111;
+    --text-light: #f8f9fa;
+    --text-muted: #cccccc;
+    --font-heading: 'Cinzel', serif;
+    --font-body: 'Poppins', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-body);
+    background-color: var(--bg-dark);
+    color: var(--text-light);
+    overflow-x: hidden;
+    line-height: 1.6;
+}
+
+h1, h2, h3 {
+    font-family: var(--font-heading);
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* ================= LOADER ================= */
+#loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: var(--bg-dark);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+
+#loader.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.loader-content h1 {
+    font-size: 2.5rem;
+    color: var(--gold);
+    letter-spacing: 2px;
+}
+
+.loader-content h1 span {
+    color: var(--dark-red);
+}
+
+.loader-content p {
+    font-size: 1rem;
+    color: var(--text-muted);
+    letter-spacing: 4px;
+    margin-top: 0.5rem;
+    text-transform: uppercase;
+}
+
+/* ================= PETALS ANIMATION ================= */
+#petals {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1000;
+    overflow: hidden;
+}
+
+.petal {
+    position: absolute;
+    background: linear-gradient(135deg, #ffb6c1, #ff69b4);
+    border-radius: 15px 0 15px 0;
+    opacity: 0.7;
+    animation: fall linear infinite;
+}
+
+@keyframes fall {
+    0% {
+        transform: translateY(-10vh) rotate(0deg);
+        opacity: 0.8;
+    }
+    100% {
+        transform: translateY(105vh) rotate(360deg);
+        opacity: 0.2;
+    }
+}
+
+/* ================= MUSIC BUTTON ================= */
+#music-btn {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: var(--gold);
+    color: var(--bg-dark);
+    border: none;
+    cursor: pointer;
+    z-index: 1001;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+#music-btn:hover {
+    transform: scale(1.1);
+}
+
+#music-btn.playing {
+    animation: spin 3s linear infinite;
+}
+
+@keyframes spin {
+    100% { transform: rotate(360deg); }
+}
+
+/* ================= NAVBAR ================= */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 1.2rem 8%;
+    z-index: 900;
+    transition: background 0.3s ease;
+    background: rgba(15, 10, 10, 0.85);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--gold);
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+
+nav ul li a {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--text-light);
+    transition: color 0.3s ease;
+}
+
+nav ul li a:hover {
+    color: var(--gold);
+}
+
+/* ================= HERO SECTION ================= */
+#home {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: url('https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(15, 10, 10, 0.7);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 0 1rem;
+}
+
+.welcome {
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--gold-light);
+    margin-bottom: 1rem;
+}
+
+.hero-content h1 {
+    font-size: 4rem;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+}
+
+.hero-content h1 span {
+    color: #ffffff;
+    font-family: var(--font-body);
+    font-weight: 300;
+}
+
+.hero-content h3 {
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+}
+
+.hero-content h2 {
+    font-size: 1.8rem;
+    color: #ffffff;
+    letter-spacing: 2px;
+    margin-bottom: 2rem;
+}
+
+.btn {
+    display: inline-block;
+    padding: 0.8rem 2rem;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    border-radius: 30px;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    background-color: var(--gold);
+    color: var(--bg-dark);
+}
+
+.scroll-down {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    color: var(--gold);
+    font-size: 1.5rem;
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translate(-50%, 0); }
+    40% { transform: translate(-50%, -10px); }
+    60% { transform: translate(-50%, -5px); }
+}
+/* =========================================
+   Groom, Bride, & Symbol Layout Styles
+   ========================================= */
+
+/* 1. Container setup to place items in a row */
+.couple-container {
+    display: flex;
+    justify-content: center; /* Centers the whole group horizontally */
+    align-items: center;     /* Aligns items vertically in the middle */
+    gap: 20px;               /* Space between photos and symbol */
+    margin: 40px auto;       /* Space above/below the section */
+    max-width: 1000px;       /* Prevents it from getting too wide on large screens */
+    flex-wrap: wrap;         /* Allows stacking on mobile phones */
+}
+
+/* 2. Styling for the Groom and Bride Cards */
+.couple-card {
+    flex: 1;                 /* Allows cards to grow equally */
+    max-width: 350px;        /* Limits maximum width of the photo card */
+    text-align: center;
+    background: rgba(9, 9, 9, 0.9); /* White background for the card */
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1); /* Soft shadow */
+    border: 2px solid #b19470; /* Optional: Traditional gold/bronze border */
+}
+
+/* 3. The Frame holding the image */
+.photo-frame {
+    width: 200px;            /* Set size of the photo area */
+    height: 200px;
+    margin: 0 auto 15px auto; /* Centers frame, adds space below */
+    border-radius: 50%;      /* Makes the frame circular */
+    overflow: hidden;        /* Hides image parts outside the circle */
+    border: 5px solid #050505;  /* White inner border */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2); /* Shadow on the photo itself */
+}
+
+/* 4. Ensuring the actual image fills the frame correctly */
+.photo-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;       /* Crops image to fit circle without stretching */
+    object-position: center; /* Centers the crop */
+}
+
+/* 5. Styling the Name (Rahul/Priya) */
+.couple-card h3 {
+    font-family: 'Cinzel', serif; /* Uses the traditional font from your HTML */
+    color: #333;
+    font-size: 1.8rem;
+    margin-bottom: 5px;
+}
+
+/* 6. Styling the Role (The Groom/The Bride) */
+.couple-card .role {
+    font-family: 'Poppins', sans-serif;
+    color: #b19470;          /* Traditional gold color */
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.9rem;
+}
+
+/* 7. Styling the Symbol in the Middle */
+.heart-divider {
+    font-size: 3rem;         /* Makes symbol large */
+    color: #e74c3c;          /* Red color for heart */
+    margin: 0 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 60px;         /* Keeps space even if stacked */
+}
+
+/* Optional: Add a subtle animation to the symbol */
+.heart-divider i {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+/* =========================================
+   Responsive Fix for Mobile Phones
+   ========================================= */
+@media (max-width: 768px) {
+    .couple-container {
+        flex-direction: column; /* Stacks items vertically on small screens */
+        gap: 10px;
+    }
+
+    .heart-divider {
+        margin: 20px 0;
+        transform: rotate(90deg); /* Optional: rotates heart when stacked */
+    }
+}
+/* ================= COMMON SECTION STYLES ================= */
+section {
+    padding: 6rem 8%;
+    text-align: center;
+}
+
+section h2 {
+    font-size: 2.5rem;
+    color: var(--gold);
+    margin-bottom: 3rem;
+    position: relative;
+    display: inline-block;
+}
+
+section h2::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 2px;
+    background-color: var(--gold);
+}
+
+/* ================= COUNTDOWN ================= */
+.countdown {
+    background-color: var(--bg-card);
+    border-y: 1px solid rgba(212, 175, 55, 0.1);
+}
+
+.counter {
+    display: flex;
+    justify-content: center;
+    gap: 2.5rem;
+    flex-wrap: wrap;
+}
+
+.counter div {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    padding: 1.5rem 2rem;
+    border-radius: 8px;
+    min-width: 120px;
+}
+
+.counter div span {
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: var(--gold);
+    display: block;
+}
+
+.counter div p {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+}
+
+/* ================= STORY ================= */
+.story-container {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.story-card {
+    background: var(--bg-card);
+    border: 1px solid rgba(212, 175, 55, 0.15);
+    padding: 2.5rem 1.5rem;
+    border-radius: 12px;
+    flex: 1;
+    min-width: 250px;
+    max-width: 320px;
+    transition: transform 0.3s ease;
+}
+
+.story-card:hover {
+    transform: translateY(-8px);
+}
+
+.story-card i {
+    font-size: 2rem;
+    color: var(--gold);
+    margin-bottom: 1rem;
+}
+
+.story-card h3 {
+    font-size: 1.3rem;
+    margin-bottom: 0.8rem;
+    color: #ffffff;
+}
+
+.story-card p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+/* ================= EVENTS ================= */
+.event-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+}
+
+.event-card {
+    background: var(--bg-card);
+    border: 1px solid rgba(212, 175, 55, 0.15);
+    padding: 2rem 1rem;
+    border-radius: 8px;
+    transition: border-color 0.3s ease;
+}
+
+.event-card:hover {
+    border-color: var(--gold);
+}
+
+.event-card h3 {
+    color: var(--gold);
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.event-card p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+/* ================= VENUE ================= */
+.venue-card {
+    background: var(--bg-card);
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+    border-radius: 12px;
+}
+
+.venue-card h3 {
+    font-size: 1.8rem;
+    color: #ffffff;
+    margin-bottom: 0.5rem;
+}
+
+.venue-card p {
+    color: var(--text-muted);
+    margin-bottom: 1.5rem;
+}
+
+.venue-card a {
+    display: inline-block;
+    padding: 0.6rem 1.8rem;
+    background-color: var(--gold);
+    color: var(--bg-dark);
+    font-weight: 600;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    transition: opacity 0.3s ease;
+}
+
+.venue-card a:hover {
+    opacity: 0.9;
+}
+
+/* ================= BLESSING ================= */
+#blessing p {
+    max-width: 600px;
+    margin: 0 auto;
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    font-style: italic;
+}
+
+/* ================= CONTACT ================= */
+.contact-box {
+    display: flex;
+    justify-content: center;
+    gap: 4rem;
+    flex-wrap: wrap;
+}
+
+.contact-box h3 {
+    color: var(--gold);
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.contact-box p {
+    color: var(--text-muted);
+}
+
+/* ================= FOOTER ================= */
+footer {
+    background-color: #080505;
+    padding: 3rem 1rem;
+    text-align: center;
+    border-top: 1px solid rgba(212, 175, 55, 0.1);
+}
+
+footer h2 {
+    color: var(--gold);
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+}
+
+footer p {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    margin-bottom: 0.5rem;
+}
+
+footer strong {
+    color: var(--gold-light);
+}
+
+/* ================= RESPONSIVE DESIGN ================= */
+@media (max-width: 768px) {
+    header nav ul {
+        display: none; /* Can be expanded into a mobile menu toggle if needed */
+    }
+    
+    .hero-content h1 {
+        font-size: 2.8rem;
+    }
+
+    .counter {
+        gap: 1rem;
+    }
+
+    .counter div {
+        min-width: 80px;
+        padding: 1rem;
+    }
+
+    .counter div span {
+        font-size: 1.8rem;
+    }
+}
